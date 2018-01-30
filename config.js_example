@@ -23,6 +23,7 @@ const config = {
 
   "dbUser": "Postgres-User",
   "dbPass": "Postgres-Pass",
+  "dbData": "Postgres-Database",
 
   // PERMISSION LEVEL DEFINITIONS.
 

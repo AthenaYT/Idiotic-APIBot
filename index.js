@@ -14,7 +14,7 @@ class APIBot extends Client {
     this.commands = new Collection();
     this.aliases = new Collection();
     this.logger = require("./util/Logger");
-    this.database = new sequelize("database", this.config.dbUser, this.config.dbPass, {
+    this.database = new sequelize(this.config.dbData, this.config.dbUser, this.config.dbPass, {
       host: "localhost",
       dialect: "postgres",
       logging: false
