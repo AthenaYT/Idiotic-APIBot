@@ -21,13 +21,17 @@ class APIBot extends Client {
     });
     this.keys = this.database.define("keys", {
       id: {
-        type: Sequelize.INTEGER,
+        type: sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
       },
       key: {
-        type: Sequelize.STRING,
+        type: sequelize.STRING,
         unique: true
+      },
+      note: {
+        type: sequelize.STRING,
+        allowNull: true
       }
     });
   }
