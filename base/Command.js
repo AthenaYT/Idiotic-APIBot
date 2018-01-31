@@ -6,7 +6,7 @@ class Command {
     usage = "No usage provided.",
     enabled = true,
     guildOnly = false,
-    aliases = new Array(),
+    aliases = [],
     permLevel = "User"
   }) {
     this.client = client;

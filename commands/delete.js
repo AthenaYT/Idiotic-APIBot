@@ -5,6 +5,7 @@ class Delete extends Command {
     super(client, {
       name: "delete",
       description: "Deletes an API key from the Idiotic-API.",
+      category: "API",
       usage: "delete <key>",
       aliases: ["del"],
       permLevel: "Bot Support"

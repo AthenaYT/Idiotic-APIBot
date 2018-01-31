@@ -5,6 +5,7 @@ class List extends Command {
     super(client, {
       name: "list",
       description: "Lists all active API keys.",
+      category: "API",
       usage: "list",
       aliases: [],
       permLevel: "Bot Support"

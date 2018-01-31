@@ -5,6 +5,7 @@ class Generate extends Command {
     super(client, {
       name: "generate",
       description: "Generates an API key for the Idiotic-API.",
+      category: "API",
       usage: "generate <@mention>",
       aliases: ["gen"],
       permLevel: "Bot Support"
