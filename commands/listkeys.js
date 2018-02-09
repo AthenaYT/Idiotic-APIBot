@@ -16,7 +16,7 @@ class List extends Command {
     try {
       const list = await this.client.keys.findAll({ attributes: ["key", "note"] }); // eslint-disable-line no-unused-vars
       await message.author.send(`Here are the current keys in the database:\n${list.map(data => `\`${data.dataValues.key}\`, NOTES: _${data.dataValues.note.length === 0 ? "No note provided" : data.dataValues.note}_`).join("\n")}`);
-      await message.channel.send(`Please check your DM's for the API key list ${message.author}.`);
+      if (message.channel.type === "text") await message.channel.send(`Please check your DM's for the API key list ${message.author}.`);
     } catch (e) {
       if (e.message === "Cannot send messages to this user") {
         await message.reply("I cannot send you that message, as it appears you have **Direct Messages's** disabled.");
