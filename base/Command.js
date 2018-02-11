@@ -18,6 +18,10 @@ class Command {
     this.help = { name, description, category, usage };
   }
 
+  init() {
+    // Here for what so ever reason
+  }
+
   parseUser(query) {
     if (query instanceof GuildMember) return query.user;
     if (query instanceof User) return query;
