@@ -1,6 +1,7 @@
 const Command = require("../base/Command.js");
 
 class Reload extends Command {
+
   constructor(client) {
     super(client, {
       name: "reload",
@@ -11,11 +12,11 @@ class Reload extends Command {
     });
   }
 
-  async run(message, args, level) { // eslint-disable-line no-unused-vars
-    if (!args || args.size < 1) return message.reply("Must provide a command to reload. Derp.");
-    
-    const commands = this.client.commands.get(args[0]) || this.client.commands.get(this.client.aliases.get(args[0]));
-    if (!commands) return message.reply(`The command \`${args[0]}\` does not exist, nor is it an alias.`);
+  async run(message, [command]) {
+    if (!command || !command.length) return message.reply("Must provide a command to reload. Derp.");
+
+    const commands = this.client.commands.get(command) || this.client.commands.get(this.client.aliases.get(command));
+    if (!commands) return message.reply(`The command \`${command}\` does not exist, nor is it an alias.`);
 
     let response = await this.client.unloadCommand(commands.conf.location, commands.help.name);
     if (response) return message.reply(`Error Unloading: ${response}`);
@@ -25,5 +26,6 @@ class Reload extends Command {
 
     message.reply(`The command \`${commands.help.name}\` has been reloaded`);
   }
+
 }
 module.exports = Reload;

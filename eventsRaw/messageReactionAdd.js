@@ -1,4 +1,5 @@
 module.exports = class {
+
   constructor(client) {
     this.client = client;
   }
@@ -6,14 +7,13 @@ module.exports = class {
   async run(data) {
     const reaction = data.d;
     const user = await this.client.fetchUser(reaction.user_id).catch(() => null);
+    if (!user) return;
     if (user.id === this.client.user.id) return;
-    if (user === null) return false;
     const channel = this.client.channels.get(reaction.channel_id);
     if (!channel || channel.type !== "text" || channel.permissionsFor(this.client.user).has("VIEW_CHANNEL") === false) return false;
     const message = await channel.fetchMessage(reaction.message_id);
     let userChannel;
     switch (reaction.emoji.name) {
-      
       case "approved":
         console.log("approved");
         userChannel = await this.client.fetchUser(message.embeds[0].fields[0].embed.footer.text);
@@ -27,9 +27,10 @@ module.exports = class {
         await this.client.awaitReply(userChannel, "Why have you declined this key?");
 
         break;
-    
+
       default:
         break;
     }
   }
+
 };

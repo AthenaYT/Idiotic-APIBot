@@ -1,5 +1,6 @@
 const messageReactionAdd = require("../eventsRaw/messageReactionAdd.js");
 module.exports = class {
+
   constructor(client) {
     this.client = client;
     this.messageReactionAdd = new messageReactionAdd(this.client);
@@ -12,4 +13,5 @@ module.exports = class {
       return null;
     }
   }
+
 };

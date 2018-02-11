@@ -1,6 +1,7 @@
 const Command = require("../base/Command.js");
 
 class List extends Command {
+
   constructor(client) {
     super(client, {
       name: "list",
@@ -12,15 +13,15 @@ class List extends Command {
     });
   }
 
-  async run(message, args, level) { // eslint-disable-line no-unused-vars
+  async run(message) {
     try {
-      const list = await this.client.keys.findAll({ attributes: ["key", "note"] }); // eslint-disable-line no-unused-vars
+      const list = await this.client.keys.findAll({ attributes: ["key", "note"] });
       await message.author.send(`Here are the current keys in the database:\n${list.map(data => `\`${data.dataValues.key}\`, NOTES: _${data.dataValues.note.length === 0 ? "No note provided" : data.dataValues.note}_`).join("\n")}`);
       if (message.channel.type === "text") await message.channel.send(`Please check your DM's for the API key list ${message.author}.`);
     } catch (e) {
       if (e.message === "Cannot send messages to this user") {
         await message.reply("I cannot send you that message, as it appears you have **Direct Messages's** disabled.");
-      } else 
+      } else
       if (e.name === "SequelizeUniqueConstraintError") {
         return message.reply("That key already exists.");
       }
@@ -28,6 +29,7 @@ class List extends Command {
       return message.reply("Something went wrong with listing keys.");
     }
   }
+
 }
 
 module.exports = List;

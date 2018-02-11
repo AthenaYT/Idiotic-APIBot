@@ -1,10 +1,10 @@
 {
-  "name": "apibot",
+  "name": "idiotic-api-bot",
   "version": "1.0.0",
   "description": "A Bot to communicate with the Idiotic-API",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "eslint .",
     "start": "node index.js"
   },
   "engines": {
@@ -12,13 +12,16 @@
   },
   "license": "MIT",
   "dependencies": {
-    "chalk": "^2.3.0",
+    "chalk": "^2.3.1",
     "discord.js": "^11.3.0",
     "klaw": "^2.1.1",
     "moment": "^2.20.1",
     "moment-duration-format": "^2.2.1",
     "pg": "^7.4.1",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^4.32.2"
+    "sequelize": "^4.33.3"
+  },
+  "devDependencies": {
+    "eslint": "^4.17.0"
   }
 }

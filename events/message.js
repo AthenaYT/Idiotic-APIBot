@@ -1,14 +1,14 @@
 module.exports = class {
+
   constructor(client) {
     this.client = client;
   }
 
   async run(message) {
-
     if (message.author.bot) return;
-    // if (!message.channel.permissionsFor(this.client.user).has("SEND_MESSAGES")) return;
-    
-    const settings = this.client.config.settings;
+    if (!message.channel.permissionsFor(this.client.user).has("SEND_MESSAGES")) return;
+
+    const { settings } = this.client.config;
     message.settings = settings;
     if (message.content.indexOf(settings.prefix) !== 0) return;
     const args = message.content.slice(settings.prefix.length).trim().split(/ +/g);
@@ -25,11 +25,12 @@ module.exports = class {
     message.author.permLevel = level;
 
     message.flags = [];
-    while (args[0] &&args[0][0] === "-") {
+    while (args[0] && args[0][0] === "-") {
       message.flags.push(args.shift().slice(1));
     }
-    
+
     this.client.logger.log(`${this.client.config.permLevels.find(l => l.level === level).name} ${message.author.username} (${message.author.id}) ran command ${cmd.help.name}`, "cmd");
     cmd.run(message, args, level);
   }
+
 };

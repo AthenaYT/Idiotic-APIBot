@@ -1,6 +1,7 @@
 const Command = require("../base/Command.js");
 
 class Reboot extends Command {
+
   constructor(client) {
     super(client, {
       name: "reboot",
@@ -11,7 +12,7 @@ class Reboot extends Command {
     });
   }
 
-  async run(message, args, level) { // eslint-disable-line no-unused-vars
+  async run(message) {
     try {
       await message.reply("Bot is shutting down.");
       this.client.commands.forEach(async cmd => {
@@ -22,6 +23,7 @@ class Reboot extends Command {
       console.log(e);
     }
   }
+
 }
 
 module.exports = Reboot;

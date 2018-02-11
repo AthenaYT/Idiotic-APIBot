@@ -5,32 +5,33 @@ const { promisify } = require("util");
 const readdir = promisify(require("fs").readdir);
 const klaw = require("klaw");
 const path = require("path");
-const sequelize = require("sequelize");
+const Sequelize = require("sequelize");
 
 class APIBot extends Client {
+
   constructor(options) {
     super(options);
     this.config = require("./config.js");
     this.commands = new Collection();
     this.aliases = new Collection();
     this.logger = require("./util/Logger");
-    this.database = new sequelize(this.config.dbData, this.config.dbUser, this.config.dbPass, {
+    this.database = new Sequelize(this.config.dbData, this.config.dbUser, this.config.dbPass, {
       host: "localhost",
       dialect: "postgres",
       logging: false
     });
     this.keys = this.database.define("keys", {
       id: {
-        type: sequelize.INTEGER,
+        type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true
       },
       key: {
-        type: sequelize.STRING,
+        type: Sequelize.STRING,
         unique: true
       },
       note: {
-        type: sequelize.STRING,
+        type: Sequelize.STRING,
         allowNull: true
       }
     });
@@ -85,13 +86,13 @@ class APIBot extends Client {
     delete require.cache[require.resolve(`${commandPath}${path.sep}${commandName}.js`)];
     return false;
   }
+
 }
 
 const client = new APIBot();
 require("./modules/functions.js")(client);
 
 const init = async () => {
-
   klaw("./commands").on("data", (item) => {
     const cmdFile = path.parse(item.path);
     if (!cmdFile.ext || cmdFile.ext !== ".js") return;
@@ -115,7 +116,6 @@ const init = async () => {
   }
 
   client.login(client.config.token);
-
 };
 
 init();

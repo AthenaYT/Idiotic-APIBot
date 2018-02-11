@@ -1,6 +1,7 @@
 const Command = require("../base/Command.js");
 
 class Delete extends Command {
+
   constructor(client) {
     super(client, {
       name: "delete",
@@ -12,18 +13,18 @@ class Delete extends Command {
     });
   }
 
-  async run(message, args, level) { // eslint-disable-line no-unused-vars
-    if (args.length === 0) return message.reply("You must supply a key to delete it.");
-    const delKey = args.join(" ");
+  async run(message, [key]) {
+    if (!key || !key.length) return message.reply("You must supply a key to delete it.");
     try {
-      const del = await this.client.keys.destroy({ where: { key: delKey} }); // eslint-disable-line no-unused-vars
-      if (!del) return message.reply(`No such key\`${delKey}\``);
-      await message.channel.send(`Successfully deleted \`${delKey}\``);
+      const del = await this.client.keys.destroy({ where: { key } });
+      if (!del) return message.reply(`No such key\`${key}\``);
+      return message.channel.send(`Successfully deleted \`${key}\``);
     } catch (e) {
       console.log(e);
       return message.reply("Something went wrong with key deletion.");
     }
   }
+
 }
 
 module.exports = Delete;
