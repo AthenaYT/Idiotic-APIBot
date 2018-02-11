@@ -6,11 +6,9 @@ module.exports = class {
     this.messageReactionAdd = new messageReactionAdd(this.client);
   }
   async run(data) {
-    if (data.t === "MESSAGE_REACTION_ADD") {
-      // console.log(data);
-      return this.messageReactionAdd.run(data);
-    } else {
-      return null;
+    switch (data.t) {
+      case "MESSAGE_REACTION_ADD": return this.messageReactionAdd.run(data);
+      default: return; 
     }
   }
 
