@@ -17,7 +17,7 @@ class APIBot extends Client {
     this.levelCache = {};
     this.ready = false;
 
-    this.once("ready", () => this.ready());
+    this.once("ready", () => this._ready());
   }
 
   async login(token) {
