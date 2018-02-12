@@ -90,12 +90,13 @@ class APIBot extends Client {
     
     const evtFiles = await readdir("../events/");
     this.logger.log(`Loading a total of ${evtFiles.length} events.`, "log");
-    evtFiles.forEach(file => {
+    for (let i = 0; i < evtFiles.length; i++) {
+      const file = evtFiles[i];
       const eventName = file.split(".")[0];
       const event = new (require(`../events/${file}`))(this);
       this.on(eventName, (...args) => event.run(...args));
       delete require.cache[require.resolve(`../events/${file}`)];
-    });
+    };
     
     for (let i = 0; i < this.config.permLevels.length; i++) {
       const thisLevel = this.config.permLevels[i];
