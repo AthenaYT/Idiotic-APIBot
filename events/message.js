@@ -6,7 +6,6 @@ module.exports = class {
 
   async run(message) {
     if (message.author.bot) return;
-    if (!message.channel.permissionsFor(this.client.user).has("SEND_MESSAGES")) return;
 
     const { settings } = this.client.config;
     message.settings = settings;
