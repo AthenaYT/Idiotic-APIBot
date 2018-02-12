@@ -81,14 +81,14 @@ class APIBot extends Client {
   }
 
   async init() {
-    klaw("../commands").on("data", (item) => {
+    klaw("./commands").on("data", (item) => {
       const cmdFile = path.parse(item.path);
       if (!cmdFile.ext || cmdFile.ext !== ".js") return;
       const response = this.loadCommand(cmdFile.dir, `${cmdFile.name}${cmdFile.ext}`);
       if (response) this.logger.error(response);
     });
     
-    const evtFiles = await readdir("../events/");
+    const evtFiles = await readdir("./events/");
     this.logger.log(`Loading a total of ${evtFiles.length} events.`, "log");
     for (let i = 0; i < evtFiles.length; i++) {
       const file = evtFiles[i];
