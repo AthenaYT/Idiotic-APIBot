@@ -40,10 +40,9 @@ class Command {
     if (query instanceof GuildMember) return query;
     if (typeof query === "string") {
       if (UserRegexp.test(query)) return guild.fetchMember(UserRegexp.exec(query)[1]).catch(() => null);
-      if (/\w{1,32}#\d{4}/.test(query)) {
-        const res = guild.members.find(member => member.user.tag === query || member.nickname === query);
-        return res ? res : null;
-      }
+      if (/\w{1,32}#\d{4}/.test(query)) return guild.members.find(member => member.user.tag === query) || null;
+      const res = guild.members.find(member => member.nickname === query);
+      return res ? res : null;
     }
     return null;
   }
