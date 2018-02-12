@@ -8,12 +8,12 @@ class APIBot extends Client {
 
   constructor(options) {
     super(options);
-    require("./modules/functions.js")(this);
-    this.config = require("./config.js");
+    require("../modules/functions.js")(this);
+    this.config = require("../config.js");
     this.commands = new Collection();
     this.aliases = new Collection();
-    this.logger = require("./util/Logger");
-    this.database = new Database();
+    this.logger = require("../util/Logger");
+    this.database = Database.db;
 
     this.ready = false;
 
@@ -26,7 +26,7 @@ class APIBot extends Client {
   }
 
   _ready() {
-    // this serves no meaning *yet*
+    Database.start();
     this.ready = true;
     this.emit("apiReady");
   }

@@ -12,7 +12,6 @@ module.exports = class {
     this.client.user.setActivity("the Idiotic API server", { type: "WATCHING" });
 
     this.client.logger.log(`${this.client.user.tag}, ready to serve ${this.client.users.size} users in ${this.client.guilds.size} servers.`, "ready");
-    await this.client.keys.sync();
   }
 
 };

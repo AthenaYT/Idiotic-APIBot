@@ -1,4 +1,5 @@
 const Command = require("../base/Command.js");
+const keys = require("../models/keys");
 
 class List extends Command {
 
@@ -15,7 +16,7 @@ class List extends Command {
 
   async run(message) {
     try {
-      const list = await this.client.keys.findAll({ attributes: ["key", "note"] });
+      const list = await keys.findAll({ attributes: ["key", "note"] });
       await message.author.send(`Here are the current keys in the database:\n${list.map(data => `\`${data.dataValues.key}\`, NOTES: _${data.dataValues.note.length === 0 ? "No note provided" : data.dataValues.note}_`).join("\n")}`);
       if (message.channel.type === "text") await message.channel.send(`Please check your DM's for the API key list ${message.author}.`);
     } catch (e) {

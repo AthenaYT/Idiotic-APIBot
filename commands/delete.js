@@ -1,4 +1,5 @@
 const Command = require("../base/Command.js");
+const keys = require("../models/keys");
 
 class Delete extends Command {
 
@@ -16,7 +17,7 @@ class Delete extends Command {
   async run(message, [key]) {
     if (!key || !key.length) return message.reply("You must supply a key to delete it.");
     try {
-      const del = await this.client.keys.destroy({ where: { key } });
+      const del = await keys.destroy({ where: { key } });
       if (!del) return message.reply(`No such key\`${key}\``);
       return message.channel.send(`Successfully deleted \`${key}\``);
     } catch (e) {
