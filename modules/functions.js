@@ -14,7 +14,7 @@ Install the Idiotic-API package \`npm i idiotic-api\` and follow the examples on
 There is a known issue with the testing on the docs page, that is due to how we're serving the returned image (buffer) for some reason apidocs doesn't seem to know how to handle it correctly.`);
   };
 
-  client.awaitReply = async (msg, question, limit = 3000) => {
+  client.awaitReply = async (msg, question, limit = 30000) => {
     const filter = m => m.author.id === msg.author.id;
     await msg.channel.send(question);
     try {

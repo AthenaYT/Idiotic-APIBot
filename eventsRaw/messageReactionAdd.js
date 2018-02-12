@@ -16,13 +16,13 @@ module.exports = class {
     switch (reaction.emoji.name) {
       case "approved":
         console.log("approved");
-        userChannel = await this.client.fetchUser(message.embeds[0].fields[0].embed.footer.text);
+        userChannel = await this.client.users.get(message.embeds[0].fields[0].embed.footer.text);
         await message.clearReactions();
         await this.client.generate(userChannel, `Approved by ${user.tag}`);
         break;
       case "declined":
         console.log("declined");
-        userChannel = await this.client.fetchUser(message.embeds[0].fields[0].embed.footer.text);
+        userChannel = await this.client.users.get(message.embeds[0].fields[0].embed.footer.text);
         await message.clearReactions();
         await this.client.awaitReply(userChannel, "Why have you declined this key?");
 
