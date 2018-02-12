@@ -96,7 +96,7 @@ class APIBot extends Client {
       const event = new (require(`../events/${file}`))(this);
       this.on(eventName, (...args) => event.run(...args));
       delete require.cache[require.resolve(`../events/${file}`)];
-    };
+    }
     
     for (let i = 0; i < this.config.permLevels.length; i++) {
       const thisLevel = this.config.permLevels[i];

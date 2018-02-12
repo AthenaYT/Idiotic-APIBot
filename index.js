@@ -1,7 +1,7 @@
 const ApiClient = require("./structures/ApiClient");
 const client = new ApiClient();
 
-client.login(client.token);
+client.login(client.config.token);
 
 client.on("disconnect", () => client.logger.warn("Bot is disconnecting..."))
   .on("reconnect", () => client.logger.log("Bot reconnecting...", "log"))
