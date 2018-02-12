@@ -24,7 +24,7 @@ module.exports = class {
         console.log("declined");
         userChannel = await this.client.users.get(message.embeds[0].fields[0].embed.footer.text);
         await message.clearReactions();
-        await this.client.awaitReply(userChannel, "Why have you declined this key?");
+        await this.client.awaitDmReply(userChannel, "Why have you declined this key?");
 
         break;
 

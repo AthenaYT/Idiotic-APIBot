@@ -25,6 +25,17 @@ There is a known issue with the testing on the docs page, that is due to how we'
     }
   };
 
+  client.awaitDmReply = async (user, question, limit = 30000) => {
+    const filter = m => m.author.id === user.id;
+    const msg = await user.send(question);
+    try {
+      const collected = await msg.channel.awaitMessages(filter, { max: 1, time: limit, errors: ["time"] });
+      return collected.first().content;
+    } catch (e) {
+      return null;
+    }
+  };
+
   client.clean = async (text) => {
     if (text && (text.constructor.name === "Promise" || text instanceof Promise)) text = await text;
     if (typeof evaled !== "string") text = require("util").inspect(text, { depth: 0 });
