@@ -13,7 +13,8 @@ class Generate extends Command {
     });
   }
 
-  async run(message, [member, note = "No note provided."]) {
+  async run(message, [member, ...note]) {
+    note = note.join(" ") || "No note provided.";
     member = await this.parseMember(member);
     if (!member) return message.reply("You must mention someone to generate an API key.");
     try {
