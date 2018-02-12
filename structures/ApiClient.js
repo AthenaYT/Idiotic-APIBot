@@ -93,7 +93,7 @@ class APIBot extends Client {
     evtFiles.forEach(file => {
       const eventName = file.split(".")[0];
       const event = new (require(`../events/${file}`))(this);
-      this.client.on(eventName, (...args) => event.run(...args));
+      this.on(eventName, (...args) => event.run(...args));
       delete require.cache[require.resolve(`../events/${file}`)];
     });
     
