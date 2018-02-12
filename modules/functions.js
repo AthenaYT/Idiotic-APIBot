@@ -46,14 +46,4 @@ There is a known issue with the testing on the docs page, that is due to how we'
   };
 
   client.wait = ms => new Promise(res => setTimeout(res, ms));
-
-  process.on("uncaughtException", (err) => {
-    const errorMsg = err.stack.replace(new RegExp(`${__dirname}/`, "g"), "./");
-    console.error("Uncaught Exception: ", errorMsg);
-    process.exit(1);
-  });
-
-  process.on("unhandledRejection", err => {
-    console.error("Uncaught Promise Error: ", err);
-  });
 };
