@@ -6,7 +6,7 @@ module.exports = class {
 
   async run(data) {
     const reaction = data.d;
-    const supportGuild = this.client.guilds.get("406609139184304139");
+    const supportGuild = this.client.guilds.get("405783659388469248");
     const officeChannel = supportGuild.channels.get("406609139184304139");
     const user = this.client.users.get(reaction.user_id) || await this.client.fetchUser(reaction.user_id).catch(() => null);
     if (!user) return;
