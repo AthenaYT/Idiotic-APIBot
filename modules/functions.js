@@ -1,9 +1,9 @@
 const keys = require("../models/keys");
 
 module.exports = (client) => {
-  client.generate = async (member, note) => {
+  client.generate = async (member, approvedby, note) => {
     const key = require("crypto").randomBytes(15).toString("base64");
-    await keys.create({ key, note });
+    await keys.create({ key, approvedby, note });
     await member.send(`
 Here's the api key \`${key}\`
 

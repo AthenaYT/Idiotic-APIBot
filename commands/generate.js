@@ -16,10 +16,11 @@ class Generate extends Command {
   async run(message, [member, ...note]) {
     note = note.join(" ") || "No note provided.";
     member = await this.parseMember(member);
+    const approvedby = message.author.id;
     if (!member) return message.reply("You must mention someone to generate an API key.");
     try {
       await message.channel.send(`Please check your DM's for the API key ${member}.`);
-      await this.client.generate(member, note);
+      await this.client.generate(member, approvedby, note);
     } catch (e) {
       if (e.message === "Cannot send messages to this user") {
         await message.reply("I cannot send you that message, as it appears you have **Direct Messages's** disabled.");

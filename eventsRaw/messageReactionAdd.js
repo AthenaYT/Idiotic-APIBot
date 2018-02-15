@@ -19,7 +19,7 @@ module.exports = class {
       case "approved": {
         console.log("approved");
         await message.clearReactions();
-        await this.client.generate(applicationUser, `Approved by ${user.tag}`);
+        await this.client.generate(applicationUser, user.tag, "No note provided.");
         break;
       }
       case "declined": {
