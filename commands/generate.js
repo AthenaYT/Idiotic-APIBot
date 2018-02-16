@@ -15,7 +15,7 @@ class Generate extends Command {
 
   async run(message, [member, ...note]) {
     note = note.join(" ") || "No note provided.";
-    member = await this.parseMember(member);
+    member = await this.parseMember(member, message.guild);
     const approvedby = message.author.id;
     if (!member) return message.reply("You must mention someone to generate an API key.");
     try {

@@ -9,7 +9,7 @@ class List extends Command {
       description: "Lists all active API keys.",
       category: "API",
       usage: "list",
-      aliases: [],
+      aliases: ["keys"],
       permLevel: "Bot Support"
     });
   }
@@ -17,7 +17,7 @@ class List extends Command {
   async run(message) {
     try {
       const list = await keys.findAll({ attributes: ["key", "note"] });
-      await message.author.send(`Here are the current keys in the database:\n${list.map(data => `\`${data.dataValues.key}\`, NOTES: _${data.dataValues.note.length === 0 ? "No note provided" : data.dataValues.note}_`).join("\n")}`);
+      await message.author.send(`Here are the current keys in the database:\n${list.map(data => `**Key:** \`${data.dataValues.key}\`, **NOTES:** _${data.dataValues.note.length === 0 ? "No note provided" : data.dataValues.note}_`).join("\n")}`);
       if (message.channel.type === "text") await message.channel.send(`Please check your DM's for the API key list ${message.author}.`);
     } catch (e) {
       if (e.message === "Cannot send messages to this user") {
