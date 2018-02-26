@@ -20,6 +20,7 @@ module.exports = class {
         console.log("approved");
         await message.clearReactions();
         await this.client.generate(applicationUser, user.tag, "No note provided.");
+        await message.guild.members.get(applicationUser).addRole("417667939039313921");
         break;
       }
       case "declined": {
