@@ -5,9 +5,9 @@ module.exports = (client) => {
     const key = require("crypto").randomBytes(15).toString("base64");
     await keys.create({ key, approvedby, note });
     await member.send(`
-Here's the api key \`${key}\`
+Here is your api key \`${key}\`
 
-You can read the docs at: http://api.anidiots.guide/
+You can read the docs at: http://dev.anidiots.guide/
 
 Install the Idiotic-API package \`npm i idiotic-api\` and follow the examples on the API Development Guild discord.gg/PgCR8Rg
 
